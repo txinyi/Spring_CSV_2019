@@ -14,6 +14,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
+import csv.domain.User;
+
 @Component
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
 

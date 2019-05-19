@@ -8,8 +8,8 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories; 
 
-@SpringBootApplication 
-@ComponentScan ("csv")  
+@SpringBootApplication(scanBasePackages = {"csv"}) 
+@ComponentScan({"csv", "csv.controller", "csv.domain", "csv.processor", "csv.repository"})
 @EntityScan("csv")
 @EnableJpaRepositories("csv")
 public class Application extends SpringBootServletInitializer { 
