@@ -50,10 +50,10 @@ public class UserController {
 	}
 	
 	@GetMapping(path="/users")
-	public @ResponseBody Iterable<User> getAllUsers() {  
+	public @ResponseBody Iterable<User> getUsers() {  
 		// returns a JSON or XML with the users
-		return userRepository.findAll();
-		//return userRepository.findSalaryRange(0.0, 4000.0);
+		//return userRepository.findAll();
+		return userRepository.findSalaryRange(0.0, 4000.0);
 	}
 
 }

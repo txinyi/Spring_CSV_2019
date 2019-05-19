@@ -15,6 +15,6 @@ import csv.User;
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer> {
 	 
-	//@Query(value = "SELECT u FROM User u WHERE u.salary >= ?1 and u.salary <= ?2")
-	//List<User> findSalaryRange(Double min, Double max); 
+	@Query(value = "SELECT u FROM User u WHERE u.salary >= ?1 and u.salary <= ?2")
+	List<User> findSalaryRange(Double min, Double max); 
 }
