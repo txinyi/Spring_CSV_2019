@@ -41,8 +41,9 @@ public class ApplicationConfiguration { // extends WebMvcConfigurerAdapter
 
     @Autowired
     public DataSource dataSource;
-    
-    // begin reader, writer, and processor 
+
+
+    //read the csv from files
     @Bean
     public FlatFileItemReader<User> csvReader(){
         FlatFileItemReader<User> reader = new FlatFileItemReader<User>();
@@ -63,6 +64,7 @@ public class ApplicationConfiguration { // extends WebMvcConfigurerAdapter
 		return new UserItemProcessor();
 	}
 
+	//Insert csv data into the database
 	@Bean
 	public JdbcBatchItemWriter<User> csvWriter() {
 		 JdbcBatchItemWriter<User> csvAnimeWriter = new JdbcBatchItemWriter<User>();
@@ -70,8 +72,7 @@ public class ApplicationConfiguration { // extends WebMvcConfigurerAdapter
 		 csvAnimeWriter.setSql("INSERT INTO user (name, salary) VALUES (:name, :salary)");
 		 csvAnimeWriter.setDataSource(dataSource);
 	        return csvAnimeWriter;
-	} 
-	// end reader, writer, and processor
+	}  
 
     // begin job info
 	@Bean
