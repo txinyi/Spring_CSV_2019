@@ -71,7 +71,7 @@ public class UserController {
     public RedirectView create(@RequestParam("file") MultipartFile multipartFile) throws IOException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException, JobRestartException, org.springframework.batch.core.repository.JobRestartException{
 		Log.info("runnnnning upload");
         //Save multipartFile file in a temporary physical folder
-        String path = "target/classes/upload/";
+        String path = "upload/";
         File fileToImport = new File(path + multipartFile.getOriginalFilename());
         Log.info("path: " + path);
         
