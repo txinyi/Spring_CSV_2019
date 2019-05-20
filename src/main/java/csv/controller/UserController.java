@@ -4,6 +4,22 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.batch.operations.JobRestartException;
+ 
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.stream.Stream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.stereotype.Service;
+import org.springframework.util.FileSystemUtils;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,8 +71,30 @@ public class UserController {
     public RedirectView create(@RequestParam("file") MultipartFile multipartFile) throws IOException, JobExecutionAlreadyRunningException, JobRestartException, JobInstanceAlreadyCompleteException, JobParametersInvalidException, JobRestartException, org.springframework.batch.core.repository.JobRestartException{
 		Log.info("runnnnning upload");
         //Save multipartFile file in a temporary physical folder
-        String path = new ClassPathResource("upload/").getURL().getPath();
+        String path = "target/classes/upload/";
         File fileToImport = new File(path + multipartFile.getOriginalFilename());
+        Log.info("path: " + path);
+        
+        String filename = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        Log.info("filename: " + filename);
+        try {
+            if (multipartFile.isEmpty()) {
+                throw new IOException("Failed to store empty file " + filename);
+            }
+            if (filename.contains("..")) {
+                // This is a security check
+                throw new IOException(
+                        "Cannot store file with relative path outside current directory "
+                                + filename);
+            }
+            try (InputStream inputStream = multipartFile.getInputStream()) {
+                Files.copy(inputStream, Paths.get(path).resolve(filename),
+                    StandardCopyOption.REPLACE_EXISTING);
+            }
+        }
+        catch (IOException e) {
+            throw new IOException("Failed to store file " + filename, e);
+        }
         
         //Launch the Batch Job
         JobExecution jobExecution = jobLauncher.run(importUserJob, new JobParametersBuilder()
