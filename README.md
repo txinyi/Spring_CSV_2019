@@ -39,12 +39,12 @@ Expose outputs on users with valid salary (0 <= salary <= 4000) in Json.
 
 
 ## Implmentation
-**Spring MVC**
+**Spring MVC**  
 Entity class which Hibernate will automatically translate into table  
 Controller class intercept incoming requests, send data to Model for further processing, get processed data from the Model and advances the data to View for rendering  
 View (WEB-INF) render views
 
-**Spring Batch**
+**Spring Batch**  
 It is used to process large chunk of data, however, I tried to explore and using it to process CSV file.
 
 
@@ -54,6 +54,7 @@ It is used to process large chunk of data, however, I tried to explore and using
 - Accessing Data MySQL - https://spring.io/guides/gs/accessing-data-mysql/ 
 - Spring data JPA Query - https://www.baeldung.com/spring-data-jpa-query 
 - Uploading files - https://spring.io/guides/gs/uploading-files/ 
+- Spring Batch CSV - https://github.com/PriyankaBolisetty/SpringBatchUploadCSVFileToDatabase
 
 
 
