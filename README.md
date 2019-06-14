@@ -1,4 +1,4 @@
-CDIT Assignment (Spring Boot and Java)
+(Spring Boot and Java)
 
 # SpringBoot MVC + MySQL + BufferedReader
 This application uses,
@@ -57,5 +57,5 @@ It is used to process large chunk of data, however, I tried to explore and using
 - Spring Batch CSV - https://github.com/PriyankaBolisetty/SpringBatchUploadCSVFileToDatabase
 
 
-
+CDIT Assignment
 
